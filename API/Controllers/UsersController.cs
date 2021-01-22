@@ -34,10 +34,24 @@ namespace API.Controllers
 
         // api/users
         [HttpPost()]
-        public void CreateUser(string userName)
+        public async Task<ActionResult> CreateUser(string userName)
         {
-            _context.Users.Add(new User(userName));
+            await _context.Users.AddAsync(new User(userName));
             _context.SaveChanges();
+            return Ok();
+        }
+
+        // api/users/3
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateUser(int id, string userName)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user != null)
+            {
+                user.SetUserName(userName);
+            }
+            _context.SaveChanges();
+            return Ok();
         }
     }
 }
