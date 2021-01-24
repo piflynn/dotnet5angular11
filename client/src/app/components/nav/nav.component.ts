@@ -7,7 +7,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class NavComponent implements OnInit {
   @Input() title = '';
+  @Input() loggedIn = false;
   @Output() loginRequest = new EventEmitter<any>();
+  @Output() logoutRequest = new EventEmitter<any>();
 
   isCollapsed = false;
   items: string[] = [
@@ -22,5 +24,8 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {}
   onLoginFormSubmit() {
     this.loginRequest.emit(this.model);
+  }
+  onLogoutClick() {
+    this.logoutRequest.emit();
   }
 }

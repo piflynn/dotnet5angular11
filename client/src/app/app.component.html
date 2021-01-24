@@ -1,4 +1,8 @@
-<app-nav [title]="title" (loginRequest)="onLoginRequest($event)"></app-nav>
+<app-nav
+  [title]="title"
+  [loggedIn]="loggedIn"
+  (loginRequest)="onLoginRequest($event)"
+></app-nav>
 <div class="container">
   <ul>
     <li *ngFor="let user of users">{{ user.userName }}</li>
