@@ -7,9 +7,11 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
+import { RegisterComponent } from './components/register/register-form.component';
 @NgModule({
-  declarations: [AppComponent, NavComponent],
+  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

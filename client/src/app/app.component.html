@@ -1,10 +1,8 @@
 <app-nav
   [title]="title"
-  [loggedIn]="loggedIn"
+  [user]="currentUser$ | async"
+  [menuItems]="menuItems"
   (loginRequest)="onLoginRequest($event)"
+  (logoutRequest)="onLogoutRequest()"
 ></app-nav>
-<div class="container">
-  <ul>
-    <li *ngFor="let user of users">{{ user.userName }}</li>
-  </ul>
-</div>
+<app-home></app-home>

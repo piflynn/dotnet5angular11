@@ -15,10 +15,9 @@
     <div
       id="collapseBasic"
       [collapse]="isCollapsed"
-      style="justify-content: space-between"
       class="collapse navbar-collapse"
     >
-      <ng-container *ngIf="loggedIn">
+      <ng-container *ngIf="!!user">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="#">Home</a>
@@ -37,64 +36,64 @@
           </li>
         </ul>
       </ng-container>
-
-      <ng-container *ngIf="!loggedIn">
-        <form
-          #loginForm="ngForm"
-          (ngSubmit)="onLoginFormSubmit()"
-          class="form d-flex"
-          autocomplete="off"
-        >
-          <input
-            name="username"
-            [(ngModel)]="model.username"
-            class="form-control me-2"
-            type="text"
-            placeholder="Username"
-            aria-label="Username"
-          />
-          <input
-            name="password"
-            [(ngModel)]="model.password"
-            class="form-control me-2"
-            type="text"
-            placeholder="Password"
-            aria-label="Password"
-          />
-          <button class="btn btn-outline-success" type="submit">Login</button>
-        </form>
-      </ng-container>
-      <ng-container *ngIf="loggedIn">
-        <div class="navbar-nav btn-group" dropdown>
-          <span dropdown>
-            <a
-              href="#"
-              dropdownToggle
-              role="button"
-              class="nav-link dropdown-toggle"
-              aria-controls="dropdown-alignment"
-            >
-              Welcome user<span class="caret"></span>
-            </a>
-            <ul
-              *dropdownMenu
-              class="dropdown-menu"
-              role="menu"
-              aria-labelledby="basic-link"
-            >
-              <li *ngFor="let choice of items">
-                <a class="dropdown-item" href="#">{{ choice }}</a>
-              </li>
-              <div class="dropdown-divider"></div>
-              <li>
-                <a class="dropdown-item" href="#" (click)="onLogoutClick()"
-                  >Logout</a
-                >
-              </li>
-            </ul>
-          </span>
-        </div>
-      </ng-container>
     </div>
+    <ng-container *ngIf="!user">
+      <form
+        #loginForm="ngForm"
+        (ngSubmit)="onLoginFormSubmit()"
+        class="form d-flex"
+        autocomplete="off"
+      >
+        <input
+          name="username"
+          [(ngModel)]="model.username"
+          class="form-control me-2"
+          type="text"
+          placeholder="Username"
+          aria-label="Username"
+        />
+        <input
+          name="password"
+          [(ngModel)]="model.password"
+          class="form-control me-2"
+          type="text"
+          placeholder="Password"
+          aria-label="Password"
+        />
+        <button class="btn btn-outline-success" type="submit">Login</button>
+      </form>
+    </ng-container>
+    <ng-container *ngIf="!!user">
+      <div class="navbar-nav btn-group" dropdown>
+        <span dropdown>
+          <a
+            href="#"
+            dropdownToggle
+            role="button"
+            class="nav-link dropdown-toggle"
+            aria-controls="dropdown-alignment"
+          >
+            Welcome <strong>{{ user?.username }}</strong
+            ><span class="caret"></span>
+          </a>
+          <ul
+            *dropdownMenu
+            class="dropdown-menu"
+            role="menu"
+            aria-labelledby="basic-link"
+          >
+            <li *ngFor="let item of menuItems">
+              <a class="dropdown-item" href="#">{{ item }}</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li>
+              <a class="dropdown-item" href="#" (click)="onLogoutClick()"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </span>
+      </div>
+    </ng-container>
   </div>
 </nav>
