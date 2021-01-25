@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-register-form',
@@ -7,14 +7,16 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
   @Output() registerRequest = new EventEmitter<any>();
-  model: any = {};
+  @Output() cancel = new EventEmitter();
+  model = { username: '', password: '', favoriteUser: '' };
   constructor() {}
 
   ngOnInit(): void {}
 
   onCancel() {
-    console.log('');
+    this.cancel.emit();
   }
+
   onSubmit() {
     this.registerRequest.emit(this.model);
   }

@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { UserListModel } from 'src/app/models/user-list.model';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   registerMode = false;
-  constructor() {}
+  apiUrl = 'https://localhost:5001/api';
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {}
 
-  registerToggle() {
-    this.registerMode = !this.registerMode;
+  onRegisterClick() {
+    this.registerMode = true;
   }
+
   onRegisterRequest(model: any) {
-    console.log(model);
+    this.accountService.register(model).subscribe((user) => {
+      console.log(user);
+      this.registerMode = false;
+    }, console.log);
+  }
+
+  onCancelRegister() {
+    this.registerMode = false;
   }
 }

@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { User } from './models/user.model';
+import { AppUser } from './models/app-user.model';
 import { AccountService } from './services/account.service';
 
 @Component({
@@ -18,6 +17,16 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.setCurrentUser();
   }
+
+  // Sets current user from browser/application/localStorage
+  setCurrentUser() {
+    const userStorage = localStorage.getItem('user');
+    if (!!userStorage) {
+      const user: AppUser = JSON.parse(userStorage);
+      this.accountService.setCurrentUser(user);
+    }
+  }
+
   onLoginRequest(model: any) {
     this.accountService.login(model).subscribe((response) => {
       console.log(response);
@@ -25,14 +34,5 @@ export class AppComponent implements OnInit {
   }
   onLogoutRequest() {
     this.accountService.logout();
-  }
-
-  // Sets current user from browser/application/localStorage
-  setCurrentUser() {
-    const userStorage = localStorage.getItem('user');
-    if (!!userStorage) {
-      const user: User = JSON.parse(userStorage);
-      this.accountService.setCurrentUser(user);
-    }
   }
 }

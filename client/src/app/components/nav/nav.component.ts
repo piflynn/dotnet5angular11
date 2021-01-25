@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { User } from 'src/app/models/user.model';
+import { AppUser } from 'src/app/models/app-user.model';
 
 @Component({
   selector: 'app-nav',
@@ -8,7 +8,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class NavComponent implements OnInit {
   @Input() title = '';
-  @Input() user: User | null = null;
+  @Input() user: AppUser | null = null;
   @Input() menuItems: string[] = [];
   @Output() loginRequest = new EventEmitter<any>();
   @Output() logoutRequest = new EventEmitter<any>();
