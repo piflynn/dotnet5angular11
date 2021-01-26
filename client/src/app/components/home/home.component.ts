@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -10,10 +9,7 @@ import { AccountService } from 'src/app/services/account.service';
 export class HomeComponent implements OnInit {
   registerMode = false;
   apiUrl = 'https://localhost:5001/api';
-  constructor(
-    private toastr: ToastrService,
-    private accountService: AccountService
-  ) {}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {}
 
@@ -22,16 +18,9 @@ export class HomeComponent implements OnInit {
   }
 
   onRegisterRequest(model: any) {
-    this.accountService.register(model).subscribe(
-      (user) => {
-        console.log(user);
-        this.registerMode = false;
-      },
-      (error) => {
-        console.log(error);
-        this.toastr.error(error.error);
-      }
-    );
+    this.accountService.register(model).subscribe((user) => {
+      this.registerMode = false;
+    });
   }
 
   onCancelRegister() {

@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,6 +9,7 @@ import { ListsComponent } from './components/lists/lists.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { NavComponent } from './components/nav/nav.component';
 import { RegisterComponent } from './components/register/register-form.component';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
