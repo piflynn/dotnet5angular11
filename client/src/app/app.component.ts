@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AppUser } from './models/app-user.model';
 import { AccountService } from './services/account.service';
 
@@ -13,7 +15,11 @@ export class AppComponent implements OnInit {
   users: any;
   menuItems = [];
   currentUser$ = this.accountService.currentUser$;
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private toastr: ToastrService,
+    private router: Router,
+    private accountService: AccountService
+  ) {}
   ngOnInit() {
     this.setCurrentUser();
   }
@@ -28,11 +34,18 @@ export class AppComponent implements OnInit {
   }
 
   onLoginRequest(model: any) {
-    this.accountService.login(model).subscribe((response) => {
-      console.log(response);
-    }, console.log);
+    this.accountService.login(model).subscribe(
+      (response) => {
+        this.router.navigateByUrl('/members');
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(error.error);
+      }
+    );
   }
   onLogoutRequest() {
     this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 }
