@@ -27,11 +27,11 @@ namespace API.Controllers
 
             using var hmac = new HMACSHA512();
             var user = new User
-            {
-                UserName = registerDto.UserName,
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
-            };
+            (
+                registerDto.UserName,
+                hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+                hmac.Key
+            );
 
             _context.Users.Add(user);
             var token = _tokenService.CreateToken(user);
