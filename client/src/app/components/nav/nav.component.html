@@ -89,7 +89,9 @@
             aria-labelledby="basic-link"
           >
             <li *ngFor="let item of menuItems">
-              <a class="dropdown-item">{{ item }}</a>
+              <a routerLink="{{ item.link }}" class="dropdown-item">
+                {{ item.display }}
+              </a>
             </li>
             <div class="dropdown-divider"></div>
             <li>

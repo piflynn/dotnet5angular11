@@ -1,1 +1,7 @@
-<p>member-list works!</p>
+<ng-container *ngIf="members$ | async as members">
+  <div class="row">
+    <div *ngFor="let member of members" class="col-2">
+      <app-member-card [member]="member"></app-member-card>
+    </div>
+  </div>
+</ng-container>

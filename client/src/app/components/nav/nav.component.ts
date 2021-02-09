@@ -10,7 +10,7 @@ import { AppUser } from 'src/app/models/app-user.model';
 export class NavComponent implements OnInit {
   @Input() title = '';
   @Input() user: AppUser | null = null;
-  @Input() menuItems: string[] = [];
+  @Input() menuItems: any[] = [];
   @Output() loginRequest = new EventEmitter<any>();
   @Output() logoutRequest = new EventEmitter<any>();
 

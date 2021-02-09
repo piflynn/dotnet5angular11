@@ -9,7 +9,9 @@ import { ListsComponent } from './components/lists/lists.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { NavComponent } from './components/nav/nav.component';
 import { RegisterComponent } from './components/register/register-form.component';
+import { MemberCardComponent } from './features/members/components/member-card/member-card.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { SharedModule } from './shared/shared.module';
     ListsComponent,
     MessagesComponent,
     routingComponents,
+    MemberCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { SharedModule } from './shared/shared.module';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

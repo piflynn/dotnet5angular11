@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   apiUrl = 'https://localhost:5001/api';
   title = 'Dating App';
   users: any;
-  menuItems = [];
+  menuItems = [{ display: 'Edit Profile', link: 'member/edit' }];
   currentUser$ = this.accountService.currentUser$;
   constructor(private router: Router, private accountService: AccountService) {}
   ngOnInit() {
