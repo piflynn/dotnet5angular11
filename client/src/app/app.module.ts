@@ -8,11 +8,14 @@ import { AppRoutingModule, routingComponents } from './app.routing';
 import { ListsComponent } from './components/lists/lists.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { NavComponent } from './components/nav/nav.component';
+import { PhotoEditorComponent } from './components/photo-editor/photo-editor.component';
 import { RegisterComponent } from './components/register/register-form.component';
 import { MemberCardComponent } from './features/members/components/member-card/member-card.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { SharedModule } from './shared/shared.module';
+import { DropZoneComponent } from './components/drop-zone/drop-zone.component';
+import { DragAndDropDirective } from './directives/drag-and-drop.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,13 +25,15 @@ import { SharedModule } from './shared/shared.module';
     MessagesComponent,
     routingComponents,
     MemberCardComponent,
+    PhotoEditorComponent,
+    DropZoneComponent,
+    DragAndDropDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule,
     SharedModule,
   ],
   providers: [

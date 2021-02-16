@@ -1,0 +1,13 @@
+<div appDragAndDrop class="dropzone">
+  <input
+    type="file"
+    #fileInput
+    id="fileInput"
+    multiple
+    (change)="fileBrowseHandler($event)"
+  />
+  <i class="fa fa-upload fa-2x"></i>
+  <h3>Drag and drop files here</h3>
+  <h3>or</h3>
+  <button class="btn btn-primary">Browse for file</button>
+</div>

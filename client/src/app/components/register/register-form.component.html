@@ -1,23 +1,86 @@
-<form (ngSubmit)="onSubmit()" #form="ngForm">
+<form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
   <h2 class="text-center text-primary">Sign up</h2>
   <hr />
   <div class="form-group">
     <input
+      [class.is-invalid]="
+        registerForm.get('username')?.errors &&
+        registerForm.get('username')?.touched
+      "
       type="text"
       class="form-control"
-      name="username"
-      [(ngModel)]="model.username"
+      formControlName="username"
       placeholder="username"
     />
+    <div
+      *ngIf="registerForm?.get('username')?.hasError('required')"
+      class="invalid-feedback"
+    >
+      Please enter a username.
+    </div>
   </div>
   <div class="form-group">
     <input
+      [class.is-invalid]="
+        registerForm.get('password')?.errors &&
+        registerForm.get('password')?.touched
+      "
       type="password"
       class="form-control"
-      name="password"
-      [(ngModel)]="model.password"
+      formControlName="password"
       placeholder="password"
     />
+    <div
+      *ngIf="registerForm.get('password')?.hasError('required')"
+      class="invalid-feedback"
+    >
+      Please enter a password.
+    </div>
+    <div
+      *ngIf="
+        !registerForm.get('password')?.hasError('required') &&
+        registerForm.get('password')?.hasError('minlength')
+      "
+      class="invalid-feedback"
+    >
+      Password must be at least 4 characters.
+    </div>
+    <div
+      *ngIf="
+        !registerForm.get('password')?.hasError('required') &&
+        registerForm.get('password')?.hasError('maxlength')
+      "
+      class="invalid-feedback"
+    >
+      Password must be no more than 8 characters.
+    </div>
+  </div>
+  <div class="form-group">
+    <input
+      [class.is-invalid]="
+        registerForm.get('confirmPassword')?.errors &&
+        registerForm.get('confirmPassword')?.touched
+      "
+      type="password"
+      class="form-control"
+      formControlName="confirmPassword"
+      placeholder="confirmPassword"
+    />
+    <div
+      *ngIf="registerForm.get('confirmPassword')?.hasError('required')"
+      class="invalid-feedback"
+    >
+      Please confirm password.
+    </div>
+    <div
+      *ngIf="
+        !registerForm.get('confirmPassword')?.hasError('required') &&
+        registerForm.get('confirmPassword')?.hasError('match')
+      "
+      class="invalid-feedback"
+    >
+      Passwords do not match.
+    </div>
   </div>
   <button class="btn btn-success mr-2" type="submit">Register</button>
   <button
@@ -28,3 +91,17 @@
     Cancel
   </button>
 </form>
+
+<div>
+  {{ registerForm.value | json }}
+  {{ registerForm.status | json }}
+</div>
+<br />
+<div *ngFor="let control of controls">
+  <span>Control: {{ control }}</span>
+  <span>Enabled: {{ registerForm.get(control)?.enabled | json }}</span>
+  <span>Value: {{ registerForm.get(control)?.value | json }}</span>
+  <span>Valid: {{ registerForm.get(control)?.valid | json }}</span>
+  <span>Errors: {{ registerForm.get(control)?.errors | json }}</span>
+  <br />
+</div>

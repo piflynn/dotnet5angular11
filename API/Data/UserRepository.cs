@@ -25,10 +25,10 @@ namespace API.Data
                 .SingleOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<MemberDto> GetUserByUsernameAsync(string username)
+        public async Task<User> GetUserByUsernameAsync(string username)
         {
             return await _context.Users
-                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .Include(u => u.Photos)
                 .SingleOrDefaultAsync(u => u.UserName == username);
         }
 

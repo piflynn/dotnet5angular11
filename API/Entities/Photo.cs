@@ -6,9 +6,9 @@ namespace API.Entities
     public class Photo
     {
         private Photo(){}
-        public Photo(string url, bool isMain){
+        public Photo(string url, string publicId){
             Url = url;
-            IsMain = isMain;
+            PublicId = publicId;
         }
         public int Id { get; set; }
         public string Url { get; set; }
@@ -17,6 +17,7 @@ namespace API.Entities
         public User User { get; set; }
         public int UserId { get; set; }
 
+        public void SetIsMain(bool isMain) => IsMain = isMain;
 
         public override string ToString()
         {
